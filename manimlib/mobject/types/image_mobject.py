@@ -34,10 +34,13 @@ class ImageMobject(Mobject):
         **kwargs
     ):
         self.height = height
-        self.image_path = get_full_raster_image_path(filename)
-        self.image = Image.open(self.image_path)
-        super().__init__(texture_paths={"Texture": self.image_path}, **kwargs)
-
+        if (isinstance(filename, str)):
+            self.image_path = get_full_raster_image_path(filename)
+            self.image = Image.open(self.image_path)
+            super().__init__(texture_paths={"Texture": self.image_path}, **kwargs)
+        else:
+            self.image = Image.fromarray(filename)
+            super().__init__(texture_paths={"Texture": self.image}, **kwargs)
     def init_data(self) -> None:
         super().init_data(length=6)
         self.data["point"][:] = [UL, DL, UR, DR, UR, DL]

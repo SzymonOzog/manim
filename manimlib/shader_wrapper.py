@@ -94,7 +94,15 @@ class ShaderWrapper(object):
         self.texture_names_to_ids = dict()
         self.textures = []
         for name, path in self.texture_paths.items():
-            self.add_texture(name, image_path_to_texture(path, self.ctx))
+            if isinstance(path, str):
+                self.add_texture(name, image_path_to_texture(path, self.ctx))
+            else:
+                im = path
+                self.addltexture(name,  self.ctx.texture(
+                    size=im.size,
+                    components=len(im.getbands()),
+                    data=im.tobytes(),
+                    ))
 
     def init_vertex_objects(self):
         self.vbo = None
