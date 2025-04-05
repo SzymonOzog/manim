@@ -98,7 +98,7 @@ class ShaderWrapper(object):
                 self.add_texture(name, image_path_to_texture(path, self.ctx))
             else:
                 im = path
-                self.addltexture(name,  self.ctx.texture(
+                self.add_texture(name,  self.ctx.texture(
                     size=im.size,
                     components=len(im.getbands()),
                     data=im.tobytes(),

@@ -1,6 +1,5 @@
 addict
 appdirs
-audioop-lts
 colour
 diskcache
 ipython>=8.18.0
