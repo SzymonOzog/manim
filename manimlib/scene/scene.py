@@ -34,6 +34,7 @@ from manimlib.utils.family_ops import recursive_mobject_remove
 from manimlib.utils.iterables import batch_by_property
 from manimlib.utils.sounds import play_sound
 from manimlib.window import Window
+from manimlib.constants import *
 
 from typing import TYPE_CHECKING
 
@@ -745,8 +746,10 @@ class Scene(object):
         if self.window.is_key_pressed(ord(manim_config.key_bindings.pan_3d)):
             ff_d_point = frame.to_fixed_frame_point(d_point, relative=True)
             ff_d_point *= self.pan_sensitivity
-            frame.increment_theta(-ff_d_point[0])
-            frame.increment_phi(ff_d_point[1])
+            # frame.increment_gamma(-ff_d_point[0])
+            frame.rotate(-ff_d_point[0], UP)
+            frame.rotate(ff_d_point[1], RIGHT)
+            # frame.increment_phi(ff_d_point[1])
         # Handle frame movements
         elif self.window.is_key_pressed(ord(manim_config.key_bindings.pan)):
             frame.shift(-d_point)
